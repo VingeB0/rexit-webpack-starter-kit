@@ -91,7 +91,11 @@ module.exports = {
   context: PATH.src,
   mode: 'development',
   entry: {
-    index: './js/index.js'
+    index: [
+      './js/index.js',
+      './styles/index.scss',
+      './layout/pages/index.pug',
+    ],
   },
   output: {
     filename: `./js/${filename('js')}`,
@@ -108,11 +112,11 @@ module.exports = {
   },
   resolve: {
     alias: {
-      "@images": PATH.images,
-      "@fonts": PATH.fonts,
-      "@js": PATH.js,
-      "@styles": PATH.styles,
-      "@layout": PATH.layout,
+      '@images': PATH.images,
+      '@fonts': PATH.fonts,
+      '@js': PATH.js,
+      '@styles': PATH.styles,
+      '@layout': PATH.layout,
     },
   },
   optimization: optimization(),
@@ -138,9 +142,13 @@ module.exports = {
       },
       {
         test: /\.pug$/,
+
         use: [
           {
             loader: 'pug-loader',
+            options: {
+              pretty: true
+            }
           },
         ],
       },
